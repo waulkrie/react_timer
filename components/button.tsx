@@ -4,6 +4,7 @@ import { styled } from 'nativewind';
 
 type ButtonProps = {
     title: string,
+    onPress: () => void,
   };
 
 function TimerButton({ title }: ButtonProps) {

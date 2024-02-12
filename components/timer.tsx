@@ -5,20 +5,29 @@ import moment from 'moment';
 
 
 type TimerProps = {
-    interval: number,
+    started: boolean,
   };
 
-function Timer(){
+function Timer({started}: TimerProps){
     const [currentTime, setCurrentTime] = React.useState('');
-    React.useEffect(() => {
-        const tick = () => {
-            setCurrentTime(moment().format('HH:mm:ss'));
-        };
-        tick();
-        const timerId = setInterval(tick, 1000);
 
-        return () => { clearInterval(timerId); }
-    }, []);
+    React.useEffect(() => {
+        console.log(`Timer start: ${started}`); // Check if start prop changes as expected
+        let timerId = null;
+    
+        if (started) {
+            const tick = () => {
+                setCurrentTime(moment().format('HH:mm:ss'));
+                console.log(currentTime); // See if currentTime updates
+            };
+            tick();
+            timerId = setInterval(tick, 1000);
+        }
+    
+        return () => {
+            if (timerId) clearInterval(timerId);
+        };
+    }, [started]);
 
     return <Text style={styles.timer}>{currentTime}</Text>;
 };
