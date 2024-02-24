@@ -1,4 +1,8 @@
-# expo-react-native-w-tailwind-typescript-boilerplate
+# React Timer  
+
+Forked from this template 
+https://github.com/Damvilion/expo-react-native-w-tailwind-typescript-boilerplate
+
 
 Run npm install
 
