@@ -11,7 +11,6 @@ function Timer({started}: TimerProps){
     const [currentTime, setCurrentTime] = React.useState('');
 
     React.useEffect(() => {
-        console.log(`Timer start: ${started}`); // Check if start prop changes as expected
         let timerId = null;
         let time = 0, startTime = 0;
         let sentinalStarted = false;
