@@ -13,7 +13,7 @@ const StyledText = styled(Text);
 
 export default function App() {
   const [isActive, setIsActive] = React.useState(false);
-
+  console.log(`App started: ${isActive}`);
     return (
         <View style={styles.container}>
           <TimerView />

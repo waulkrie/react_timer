@@ -5,6 +5,7 @@ import TimerButton from './button';
 
 function TimerView(){
     const [isActive, setIsActive] = React.useState(false);
+    const [splitList, setSplitList] = React.useState([]);
 
     return (
         <View style={styles.container}>
@@ -12,6 +13,13 @@ function TimerView(){
           <Button 
                 title={isActive ? "Stop" : "Start"}
                 onPress={() => setIsActive(!isActive)}
+          />
+          <Button
+                title="Split"
+                onPress={() => {
+                  console.log('Split pressed!');
+                  setSplitList([...splitList, 'timePlaceHolder'])
+                }}
           />
         </View>
       );
