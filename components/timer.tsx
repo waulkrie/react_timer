@@ -8,7 +8,7 @@ type TimerProps = {
   };
 
 function Timer({started}: TimerProps){
-    const [currentTime, setCurrentTime] = React.useState('');
+    const [currentTime, setCurrentTime] = React.useState(''); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
 
     React.useEffect(() => {
         let timerId = null;
