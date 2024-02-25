@@ -5,9 +5,10 @@ import { styled } from 'nativewind';
 
 type TimerProps = {
     started: boolean,
+    callback: (time: string) => void
   };
 
-function Timer({started}: TimerProps){
+function Timer({started, callback}: TimerProps){
     const [currentTime, setCurrentTime] = React.useState(''); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
 
     React.useEffect(() => {
@@ -30,6 +31,7 @@ function Timer({started}: TimerProps){
                     milli = isoString.slice(14, isoString.length - 1);
                 }
                 setCurrentTime(milli);
+                callback(milli);
             };
             tick();
             timerId = setInterval(tick, 10);

@@ -13,18 +13,19 @@ function TimerView(){
 
     return (
         <View style={styles.container}>
-          <Timer started={isActive}/>
-          <Button 
+          <Timer started={isActive}
+                  callback={handleUpdateTime}
+          />
+          <Button
                 title={isActive ? "Stop" : "Start"}
                 onPress={() => setIsActive(!isActive)}
           />
           <Button
                 title="Split"
                 onPress={() => {
-                  console.log(splitList);
-                  setSplitList(splitList.concat('splitPlaceHolder'))
+                  setSplitList([...splitList, currentTime]); // append new split time to splitList
+                  console.log([...splitList, currentTime]);
                 }
-                callback={handleUpdateTime}
               }
           />
         </View>
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
       // Convert Tailwind classes to StyleSheet
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      // alignItems: 'center',
       backgroundColor: '#000F',
     },
 });
