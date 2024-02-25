@@ -7,6 +7,7 @@ function TimerView(){
     const [isActive, setIsActive] = React.useState(false);
     const [splitList, setSplitList] = React.useState<string[]>([]);
     const [currentTime, setCurrentTime] = React.useState('');
+
     const handleUpdateTime = (time: string) => {
       setCurrentTime(time);
   }
@@ -16,18 +17,17 @@ function TimerView(){
           <Timer started={isActive}
                   callback={handleUpdateTime}
           />
-          <Button
-                title={isActive ? "Stop" : "Start"}
-                onPress={() => setIsActive(!isActive)}
+          <View style={styles.buttons}>
+          <Button title={isActive ? "Stop" : "Start"}
+                  onPress={() => setIsActive(!isActive)}
           />
-          <Button
-                title="Split"
-                onPress={() => {
-                  setSplitList([...splitList, currentTime]); // append new split time to splitList
-                  console.log([...splitList, currentTime]);
-                }
-              }
+          <Button title="Split"
+                  onPress={() => {
+                    setSplitList([...splitList, currentTime]); // append new split time to splitList
+                    console.log([...splitList, currentTime]);
+                  }}
           />
+        </View>
         </View>
       );
 }
@@ -40,7 +40,14 @@ const styles = StyleSheet.create({
       // Convert Tailwind classes to StyleSheet
       flex: 1,
       justifyContent: 'center',
-      // alignItems: 'center',
+      alignItems: 'center',
       backgroundColor: '#000F',
     },
-});
+    buttons: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      width: '100%',
+    },
+}); 
+
