@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Text, StyleSheet, View, Button} from 'react-native';
 import Timer from './timer';
-import TimerButton from './button';
+import ListView from './listView';
 
 function TimerView(){
     const [isActive, setIsActive] = React.useState(false);
@@ -27,7 +27,10 @@ function TimerView(){
                     console.log([...splitList, currentTime]);
                   }}
           />
-        </View>
+          </View>
+          <View>
+            <ListView list={splitList}/>
+          </View>
         </View>
       );
 }
