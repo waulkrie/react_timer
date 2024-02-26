@@ -1,27 +1,43 @@
 import React from 'react';
 import { Text, StyleSheet} from 'react-native';
 import { styled } from 'nativewind';
-import moment from 'moment';
 
 
 type TimerProps = {
     started: boolean,
+    callback: (time: string) => void
   };
 
-function Timer({started}: TimerProps){
-    const [currentTime, setCurrentTime] = React.useState('');
+function Timer({started, callback}: TimerProps){
+    const [currentTime, setCurrentTime] = React.useState(''); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
 
     React.useEffect(() => {
-        console.log(`Timer start: ${started}`); // Check if start prop changes as expected
         let timerId = null;
+        let time = 0, startTime = 0;
+        let sentinalStarted = false;
     
         if (started) {
+            if (!sentinalStarted) {
+                startTime = time = Date.now();
+                sentinalStarted = true;
+            }
+
             const tick = () => {
-                setCurrentTime(moment().format('HH:mm:ss'));
-                console.log(currentTime); // See if currentTime updates
+                time = Date.now();
+                let diff:Date = new Date(time - startTime);
+                const isoString = diff.toISOString();
+                let milli = isoString.slice(17, isoString.length - 1);
+                if (diff.getMinutes() > 0) {
+                    milli = isoString.slice(14, isoString.length - 1);
+                }
+                setCurrentTime(milli);
+                callback(milli);
             };
             tick();
-            timerId = setInterval(tick, 1000);
+            timerId = setInterval(tick, 10);
+        } else {
+            time = 0;
+            sentinalStarted = false;
         }
     
         return () => {

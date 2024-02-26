@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-react-native-w-tailwind",
-    "slug": "expo-react-native-w-tailwind",
+    "name": "React-Timer",
+    "slug": "React-Timer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
