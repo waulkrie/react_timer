@@ -7,16 +7,14 @@ type ListViewProps = {
     };
 
 function ListView(props: ListViewProps){
-  React.useEffect(() => {
-
-  }, [props.list]);
 
 
     return (
         <View style={styles.container}>
           <Text style={styles.text}>Splits</Text>
+          <div/>
             {props.list.map((item, index) => {
-                return <Text style={styles.text}
+                return <Text style={styles.item}
                  key={index}>{item}</Text>
             })}
         </View>
@@ -29,12 +27,20 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#000F',
+      padding: 50,
     },
     text: {
       // styles for text...
       color: '#FFFFFFFF',
       fontSize: 24,
       fontWeight: '200',
+    },
+    item: {
+      // styles for item...
+      color: '#FFFFFFFF',
+      fontSize: 24,
+      fontWeight: '200',
+      padding: 3,
     },
 });
 
