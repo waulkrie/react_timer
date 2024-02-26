@@ -27,6 +27,12 @@ function TimerView(){
                     console.log([...splitList, currentTime]);
                   }}
           />
+          <Button title="Reset Splits"
+                  onPress={() => {
+                    setSplitList([...[]]); // append new split time to splitList
+                    //console.log([...splitList, currentTime]);
+                  }}
+          />
           </View>
           <View>
             <ListView list={splitList}/>
