@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     },
     buttons: {
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'center',
       alignItems: 'center',
       width: '100%',
     },
