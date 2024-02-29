@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import { styled, NativeWindStyleSheet } from 'nativewind';
-import TimerView from './components/timerView';
+import TimerView from '../components/timerView';
 
 NativeWindStyleSheet.setOutput({
   default: "native",
