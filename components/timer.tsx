@@ -8,9 +8,11 @@ type TimerProps = {
     callback: (time: string) => void
   };
 
-function Timer({started, callback}: TimerProps){
-    const [currentTime, setCurrentTime] = React.useState(''); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
 
+
+function Timer({started, callback}: TimerProps){
+    const [currentTime, setCurrentTime] = React.useState('00:00.000'); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
+    
     React.useEffect(() => {
         let timerId = null;
         let time = 0, startTime = 0;
