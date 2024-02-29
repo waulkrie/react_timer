@@ -19,12 +19,18 @@ function TimerView(){
           />
           <View style={styles.buttons}>
           <Button title={isActive ? "Stop" : "Start"}
-                  onPress={() => setIsActive(!isActive)}
+                  onPress={() => {
+                    setIsActive(!isActive);
+                    if (!isActive) {
+                      setSplitList([]); // clear splitList
+                    }
+                  }}
           />
           <Button title="Split"
                   onPress={() => {
-                    setSplitList([...splitList, currentTime]); // append new split time to splitList
-                    console.log([...splitList, currentTime]);
+                    let newList = [...splitList, currentTime]
+                    setSplitList(newList); // append new split time to splitList
+                    console.log(newList);
                   }}
           />
           </View>
