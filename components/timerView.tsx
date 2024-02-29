@@ -38,7 +38,7 @@ function TimerView(){
                 }}
         />
       </StyledView>
-      <StyledScrollView className="max-h-80 w-full mt-4">
+      <StyledScrollView className="max-h-90 w-full mt-4">
         <ListView list={splitList}/>
       </StyledScrollView>
     </StyledView>
