@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
-import { styled } from 'nativewind';
-import TimerView from './components/timerView';
+import { styled, NativeWindStyleSheet } from 'nativewind';
+import TimerView from '../components/timerView';
+
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 const StyledText = styled(Text);
 
@@ -19,13 +23,12 @@ export default function App() {
 
 
 // Styles
-  const styles = StyleSheet.create({
-    container: {
-      // Convert Tailwind classes to StyleSheet
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#000F',
-    },
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start', 
+    alignItems: 'stretch',
+    backgroundColor: '#000F',
+    paddingTop: 20,
+  },
 });
-    

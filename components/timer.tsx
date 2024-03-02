@@ -8,9 +8,11 @@ type TimerProps = {
     callback: (time: string) => void
   };
 
-function Timer({started, callback}: TimerProps){
-    const [currentTime, setCurrentTime] = React.useState(''); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
 
+
+function Timer({started, callback}: TimerProps){
+    const [currentTime, setCurrentTime] = React.useState('00:00.000'); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
+    
     React.useEffect(() => {
         let timerId = null;
         let time = 0, startTime = 0;
@@ -24,7 +26,7 @@ function Timer({started, callback}: TimerProps){
 
             const tick = () => {
                 time = Date.now();
-                let diff:Date = new Date(time - startTime);
+                let diff:Date = new Date(time - startTime); // need whole new object?
                 const isoString = diff.toISOString();
                 let milli = isoString.slice(17, isoString.length - 1);
                 if (diff.getMinutes() > 0) {

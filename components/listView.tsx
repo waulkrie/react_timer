@@ -12,7 +12,6 @@ function ListView(props: ListViewProps){
     return (
         <View style={styles.container}>
           <Text style={styles.text}>Splits</Text>
-          <div/>
             {props.list.map((item, index) => {
                 return <Text style={styles.item}
                  key={index}>{item}</Text>
