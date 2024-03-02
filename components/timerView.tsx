@@ -37,6 +37,12 @@ function TimerView(){
                   console.log(newList);
                 }}
         />
+        <Button title="Reset Splits"
+                onPress={() => {
+                  setSplitList([...[]]); // append new split time to splitList
+                  //console.log([...splitList, currentTime]);
+                }}
+        />
       </StyledView>
       <StyledScrollView className="max-h-90 w-full mt-4">
         <ListView list={splitList}/>

@@ -26,7 +26,7 @@ function Timer({started, callback}: TimerProps){
 
             const tick = () => {
                 time = Date.now();
-                let diff:Date = new Date(time - startTime);
+                let diff:Date = new Date(time - startTime); // need whole new object?
                 const isoString = diff.toISOString();
                 let milli = isoString.slice(17, isoString.length - 1);
                 if (diff.getMinutes() > 0) {
