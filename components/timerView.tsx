@@ -32,7 +32,7 @@ function TimerView(){
                   }
                 }}
         />
-        <StyledButton className='ml-4 w-1/2 pl-10' 
+        <StyledButton className='pl-10' 
                 title="Split"
                 onPress={() => {
                   const newList = [...splitList, currentTime];

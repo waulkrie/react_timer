@@ -5,12 +5,10 @@ import { styled } from 'nativewind';
 const StyledView = styled(View);
 const StyledText = styled(Text);
 
-function Settings(){
+export default function Settings(){
     return (
         <StyledView>
           <StyledText>Settings</StyledText>
         </StyledView>
       );
 }
-
-export default Settings;

@@ -4,8 +4,10 @@ import { styled, NativeWindStyleSheet } from 'nativewind';
 import TimerView from '../components/timerView';
 
 NativeWindStyleSheet.setOutput({
-  default: "native",
+  // web: 'css',
+  default: 'native'
 });
+// NativeWindStyleSheet.setColorScheme('dark');
 
 const StyledText = styled(Text);
 
