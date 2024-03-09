@@ -1,38 +1,16 @@
-# React Timer  
-****  
-Forked from this template 
-https://github.com/Damvilion/expo-react-native-w-tailwind-typescript-boilerplate
-  
-  
-  
-**How to run**
-`npm install`
-`npx expo start`
+# Starter base
 
-### Development Environment
+A starting point to help you set up your project quickly and use the common components provided by `react-native-reusables`. The idea is to make it easier for you to get started.
 
-Windows/Mac with Android run ->  
-`npx expo start --android`
+## Features
 
-Windows/Mac with Browser run ->  
-`npx expo start --web`
+- NativeWind v4
+- Dark and light mode
+    - Android Navigation Bar matches mode
+    - Persistant mode
+- Common components
+    - Icons, ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
 
-Mac with iPhone run ->  
-`npx expo start --ios`
-
-Windows with iPhone App (Expo Go) run ->  
-`npx expo start --tunnel`
-
-### Notable Libraries
-
-[NativeWind](https://www.nativewind.dev/)
-Web CSS like styling for native development
-
-[React-Native-Reusables  ](https://github.com/mrzachnugent/react-native-reusables)  
-Resusable NativeWind Styled Component Library
-
-[Expo-av  ](https://docs.expo.dev/versions/latest/sdk/audio/)
-Audio library
-
-[Expo Slider](https://docs.expo.dev/versions/latest/sdk/slider/)  
-Slider Component  
+<img src="https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc"
+     alt="starter-base-template"
+     style="width:270px;" />
