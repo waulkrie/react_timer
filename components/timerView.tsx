@@ -19,7 +19,7 @@ function TimerView(){
   }
 
     return (
-      <StyledView className="flex-1 justify-start items-center px-4">
+      <StyledView className="flex-1 justify-start stretch items-center px-4 bg-black">
       <StyledView className="flex-row justify-center mt-8">
         <Timer started={isActive} time={currentTime} callback={handleUpdateTime} />
       </StyledView>
@@ -32,7 +32,7 @@ function TimerView(){
                   }
                 }}
         />
-        <StyledButton className='pl-10' 
+        <StyledButton className="bg-blue-500"
                 title="Split"
                 onPress={() => {
                   const newList = [...splitList, currentTime];
@@ -52,7 +52,7 @@ function TimerView(){
         <ListView list={splitList}/>
       </StyledScrollView>
       <StyledView className="flex-row justify-center py-7">
-        <Link href="/settings" className="text-blue-500 text-32">Settings</Link>
+        <Link href="/settings" className="text-blue-500 text-lg">Settings</Link>
       </StyledView>
     </StyledView>
       );

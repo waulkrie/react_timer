@@ -1,19 +1,38 @@
 # React Timer  
-
+****  
 Forked from this template 
 https://github.com/Damvilion/expo-react-native-w-tailwind-typescript-boilerplate
+  
+  
+  
+**How to run**
+`npm install`
+`npx expo start`
 
+### Development Environment
 
-Run npm install
+Windows/Mac with Android run ->  
+`npx expo start --android`
 
-Tailwind (Native Wind Docs) -> https://www.nativewind.dev/
+Windows/Mac with Browser run ->  
+`npx expo start --web`
 
----- Development Environment ---- <br>
+Mac with iPhone run ->  
+`npx expo start --ios`
 
-Windows with iPhone App (Expo Go) run -> npx expo start --tunnel
+Windows with iPhone App (Expo Go) run ->  
+`npx expo start --tunnel`
 
-Windows/Mac with Android run -> npx expo start --android
+### Notable Libraries
 
-Windows/Mac with Browser run -> npx expo start --web
+[NativeWind](https://www.nativewind.dev/)
+Web CSS like styling for native development
 
-Mac with iPhone run -> npx expo start --ios
+[React-Native-Reusables  ](https://github.com/mrzachnugent/react-native-reusables)  
+Resusable NativeWind Styled Component Library
+
+[Expo-av  ](https://docs.expo.dev/versions/latest/sdk/audio/)
+Audio library
+
+[Expo Slider](https://docs.expo.dev/versions/latest/sdk/slider/)  
+Slider Component  
