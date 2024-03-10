@@ -3,6 +3,7 @@ import { View, Text, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
 import { Card, CardHeader } from '../components/ui/card';
 import { Button } from '~/components/ui/button';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -19,6 +20,18 @@ export default function Settings(){
     // console.log(`Threshold: ${threshold}`);
   }, [threshold, noiseFloor]);
 
+  
+  React.useEffect(() => {
+    (async () => {
+      const thresh = await AsyncStorage.getItem('threshold');
+      if (!thresh) {
+        AsyncStorage.setItem('threshold', threshold.toString());
+        return;
+      }
+      
+    })().finally(() => {
+      //clean up
+    })}, []);
 
   function handleThreshChange(value: number) {
     setThreshold(value);

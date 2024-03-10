@@ -52,6 +52,7 @@ function TimerView(){
       </ScrollView>
       <View className="flex-row justify-center py-7">
         <Link href="/settings" className="text-blue-500 text-lg">Settings</Link>
+        <Link href="/profile" className="text-blue-500 text-lg px-7">Profile</Link>
       </View>
     </View>
       );
