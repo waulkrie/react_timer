@@ -1,17 +1,17 @@
 import React from 'react';
 import { Text, StyleSheet} from 'react-native';
-import { styled } from 'nativewind';
 
 
 type TimerProps = {
     started: boolean,
+    time: string,
     callback: (time: string) => void
   };
 
 
 
-function Timer({started, callback}: TimerProps){
-    const [currentTime, setCurrentTime] = React.useState('00:00.000'); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
+function Timer({started, time, callback}: TimerProps){
+    // const [currentTime, setCurrentTime] = React.useState('00.000'); // lift this to parent component https://info340.github.io/interactive-react.html#lifting-up-state
     
     React.useEffect(() => {
         let timerId = null;
@@ -32,7 +32,7 @@ function Timer({started, callback}: TimerProps){
                 if (diff.getMinutes() > 0) {
                     milli = isoString.slice(14, isoString.length - 1);
                 }
-                setCurrentTime(milli);
+                // setCurrentTime(milli);
                 callback(milli);
             };
             tick();
@@ -47,7 +47,7 @@ function Timer({started, callback}: TimerProps){
         };
     }, [started]);
 
-    return <Text style={styles.timer}>{currentTime}</Text>;
+    return <Text style={styles.timer}>{time}</Text>;
 };
 
 

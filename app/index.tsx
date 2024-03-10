@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
-import { styled, NativeWindStyleSheet } from 'nativewind';
+// import { styled, NativeWindStyleSheet } from 'nativewind';
 import TimerView from '../components/timerView';
 
-NativeWindStyleSheet.setOutput({
-  default: "native",
-});
+// NativeWindStyleSheet.setOutput({
+//   // web: 'css',
+//   default: 'native'
+// });
+// NativeWindStyleSheet.setColorScheme('dark');
 
-const StyledText = styled(Text);
+// const StyledText = styled(Text);
 
 // https://docs.pmnd.rs/zustand/guides/updating-state
 
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start', 
     alignItems: 'stretch',
-    backgroundColor: '#000F',
+    backgroundColor: '#000',
     paddingTop: 20,
   },
 });
