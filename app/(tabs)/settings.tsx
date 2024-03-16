@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ViewBase } from 'react-native';
 import { styled } from 'nativewind';
 import Slider from '@react-native-community/slider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Card from '../components/card';
+import Card from '../../components/card';
 
 const StyledView = styled(View);
 const StyledText = styled(Text);
