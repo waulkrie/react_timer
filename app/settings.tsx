@@ -46,12 +46,12 @@ export default function Settings() {
     <StyledView className='flex h-screen items-center justify-start bg-zinc-900'>
       <StyledText className='text-lg text-blue-500'>Settings</StyledText>
       <Card>
-        <StyledView className='flex w-full flex-row justify-between px-1'>
+        <StyledView className='flex flex-row justify-between px-1'>
           <StyledText className='text-lg text-gray-500'>Threshold</StyledText>
           <StyledText className='text-lg text-blue-600'>{threshold}</StyledText>
         </StyledView>
         <Slider
-          style={{ width: 250, height: 40 }}
+          style={{ width: 333, height: 40 }}
           minimumValue={0}
           maximumValue={1}
           value={threshold} // set this to the value from AsyncStorage
@@ -63,12 +63,12 @@ export default function Settings() {
         />
       </Card>
       <Card className='flex justify-center'>
-        <StyledView className='flex w-full flex-row justify-between px-1'>
+        <StyledView className='flex flex-row justify-between px-1'>
           <StyledText className='text-lg text-gray-500'>Noise Floor</StyledText>
           <StyledText className='text-lg text-blue-600'>{noiseFloor}</StyledText>
         </StyledView>
         <Slider
-          style={{ width: 250, height: 40 }}
+          style={{ width: 333, height: 40 }}
           minimumValue={0}
           maximumValue={1}
           value={noiseFloor} // set this to the value from AsyncStorage
