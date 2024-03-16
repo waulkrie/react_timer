@@ -19,7 +19,7 @@ function TimerView(){
   }
 
     return (
-      <StyledView className="flex-1 justify-start stretch items-center px-4 bg-black">
+      <StyledView className="items-center justify-start flex-1 px-4 stretch">
       <StyledView className="flex-row justify-center mt-8">
         <Timer started={isActive} time={currentTime} callback={handleUpdateTime} />
       </StyledView>
@@ -48,11 +48,11 @@ function TimerView(){
                 }}
         />
       </StyledView>
-      <StyledScrollView className="max-h-90 w-full mt-4">
+      <StyledScrollView className="w-full mt-4 max-h-90">
         <ListView list={splitList}/>
       </StyledScrollView>
       <StyledView className="flex-row justify-center py-7">
-        <Link href="/settings" className="text-blue-500 text-lg">Settings</Link>
+        <Link href="/settings" className="text-lg text-blue-500">Settings</Link>
       </StyledView>
     </StyledView>
       );

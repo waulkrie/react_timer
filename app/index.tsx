@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
-import { styled, NativeWindStyleSheet } from 'nativewind';
+import { styled, NativeWindStyleSheet, useColorScheme } from 'nativewind';
 import TimerView from '../components/timerView';
 
 NativeWindStyleSheet.setOutput({
   // web: 'css',
   default: 'native'
 });
-// NativeWindStyleSheet.setColorScheme('dark');
 
-const StyledText = styled(Text);
+
+const StyledView = styled(View);
 
 // https://docs.pmnd.rs/zustand/guides/updating-state
 
@@ -17,20 +17,9 @@ const StyledText = styled(Text);
 export default function App() {
   console.log(`App started...`);
     return (
-        <View style={styles.container}>
+        <StyledView className='h-screen antialiased bg-zinc-900' >
           <TimerView />
-        </View>
+        </StyledView>
       );
 };
 
-
-// Styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start', 
-    alignItems: 'stretch',
-    backgroundColor: '#000',
-    paddingTop: 20,
-  },
-});
