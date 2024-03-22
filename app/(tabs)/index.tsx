@@ -1,4 +1,5 @@
 import React from 'react';
+import { Audio } from 'expo-av';
 import { View, Text, StyleSheet } from 'react-native';
 import { styled, NativeWindStyleSheet, useColorScheme } from 'nativewind';
 import TimerView from '../../components/timerView';
@@ -14,6 +15,7 @@ const StyledView = styled(View);
 
 export default function App() {
   console.log(`App started...`);
+
   return (
     <StyledView className='h-screen bg-zinc-900 antialiased'>
       <TimerView />

@@ -1,10 +1,14 @@
 import React, { useCallback } from 'react';
 import { Text, View, Pressable, ScrollView } from 'react-native';
 import { Link } from 'expo-router';
+import { styled } from 'nativewind';
+import { Audio } from 'expo-av';
+import { Recording } from 'expo-av/build/Audio';
 import Timer from './timer';
 import ListView from './listView';
-import { styled } from 'nativewind';
 import Accordion from './accordian';
+import pino from 'pino';
+const logger = pino();
 
 const StyledView = styled(View);
 const StyledText = styled(Text);
@@ -15,10 +19,76 @@ function TimerView() {
   const [isActive, setIsActive] = React.useState(false);
   const [splitList, setSplitList] = React.useState<string[]>([]);
   const [currentTime, setCurrentTime] = React.useState('00.000');
+  const [recording, setRecording] = React.useState<Recording>();
+  const [permissionResponse, requestPermission] = Audio.usePermissions();
+  const [audioMetering, setAudioMetering] = React.useState<number[]>([]);
+  let metering = -160;
 
-  const handleUpdateTime = (time: string) => {
+  function handleUpdateTime(time: string) {
     setCurrentTime(time);
-  };
+  }
+
+  function addSplit(time: string) {
+    logger.info('list:', splitList, 'time:', time);
+    const newList = [...splitList, time];
+    setSplitList(newList); // append new split time to splitList
+    console.log(newList);
+  }
+
+  async function startRecording() {
+    try {
+      setAudioMetering([]);
+      console.log('Starting recording..');
+
+      if (permissionResponse?.status !== 'granted') {
+        console.log('Requesting permission..');
+        await requestPermission();
+      }
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true,
+      });
+
+      const { recording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.LowQualityMonoAudio,
+        undefined, // onRecordingStatusUpdate
+        10,
+      );
+      setRecording(recording);
+
+      recording.setOnRecordingStatusUpdate((status) => {
+        if (status.metering) {
+          metering = status.metering;
+          // console.log(Date.now(), ',', status.metering);
+          logger.info(Date.now(), ',', status.metering);
+          if (status.metering > -50) addSplit(currentTime); // add split if metering is greater than -10
+
+          setAudioMetering((curVal) => [...curVal, status.metering || -160]);
+        }
+      });
+    } catch (err) {
+      console.error('Failed to start recording', err);
+    }
+  }
+
+  async function stopRecording() {
+    if (!recording) {
+      return;
+    }
+
+    console.log('Stopping recording..');
+    setRecording(undefined);
+    await recording.stopAndUnloadAsync();
+    await Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+    });
+    const uri = recording.getURI();
+    console.log('Recording stopped and stored at', uri); ///TODO: USE FILESYSTEM TO DELETE THIS FILE
+    metering = -160;
+    if (uri) {
+      // setMemos((existingMemos) => [{ uri, metering: audioMetering }, ...existingMemos]);
+    }
+  }
 
   return (
     <StyledView className='stretch flex-1 items-center justify-start px-4'>
@@ -30,8 +100,11 @@ function TimerView() {
           className='rounded-md bg-blue-500 px-2'
           onPress={() => {
             setIsActive(!isActive);
-            if (!isActive) {
-              setSplitList([]); // clear splitList
+            if (isActive === false) {
+              startRecording();
+            } else {
+              stopRecording(); ///TODO: MOVE THIS TO PROGRAMATICALLY STOP BASED ON NUMBER OF SPLITS
+              // setSplitList([]); // clear splitList
             }
           }}
         >
