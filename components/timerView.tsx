@@ -7,6 +7,7 @@ import { Recording } from 'expo-av/build/Audio';
 import Timer from './timer';
 import ListView from './listView';
 import Accordion from './accordian';
+import { useStopwatch } from 'react-use-precision-timer';
 import pino from 'pino';
 const logger = pino();
 

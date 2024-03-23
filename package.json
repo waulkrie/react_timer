@@ -30,6 +30,7 @@
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
     "react-native-web": "~0.19.6",
+    "react-use-precision-timer": "^3.5.5",
     "tailwindcss": "^3.3.2"
   },
   "devDependencies": {
