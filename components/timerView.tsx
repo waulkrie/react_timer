@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Text, View, Pressable, ScrollView } from 'react-native';
 import { Link } from 'expo-router';
 import { styled } from 'nativewind';
@@ -22,10 +22,14 @@ function TimerView() {
   const [recording, setRecording] = React.useState<Recording>();
   const [permissionResponse, requestPermission] = Audio.usePermissions();
   const [audioMetering, setAudioMetering] = React.useState<number[]>([]);
+  const [meterTime, setMeterTime] = React.useState<string[]>([]);
   let metering = -160;
 
   function handleUpdateTime(time: string) {
     setCurrentTime(time);
+  }
+  function getCurrentTime(): string {
+    return currentTime;
   }
 
   function addSplit(time: string) {
@@ -61,9 +65,10 @@ function TimerView() {
           metering = status.metering;
           // console.log(Date.now(), ',', status.metering);
           logger.info(Date.now(), ',', status.metering);
-          if (status.metering > -50) addSplit(currentTime); // add split if metering is greater than -10
+          // if (status.metering > -50) addSplit(getCurrentTime()); // add split if metering is greater than -10
 
           setAudioMetering((curVal) => [...curVal, status.metering || -160]);
+          setMeterTime((val) => [...val, Date.now().toString()]);
         }
       });
     } catch (err) {
@@ -89,6 +94,32 @@ function TimerView() {
       // setMemos((existingMemos) => [{ uri, metering: audioMetering }, ...existingMemos]);
     }
   }
+
+  // y = mx + b
+  // m = (y2 - y1) / (x2 - x1)
+  // m = (lastMetering - metering) / (lastTime - currentTime)
+  useEffect(() => {
+    if (audioMetering.length < 2) return;
+    const lastMetering = audioMetering[audioMetering.length - 2];
+    const metering = audioMetering[audioMetering.length - 1];
+    const lastMeterTime = meterTime[meterTime.length - 2];
+    const currentTime = meterTime[meterTime.length - 1];
+    const m = (lastMetering - metering) / (parseInt(lastMeterTime) - parseInt(currentTime));
+    logger.info(
+      'm:',
+      m,
+      'lastMetering:',
+      lastMetering,
+      'metering:',
+      metering,
+      'timeDelta:',
+      parseInt(lastMeterTime) - parseInt(currentTime),
+    );
+    if (lastMetering > -20 && m > 0.3) {
+      logger.info('WE DID IT JINKINS!');
+      addSplit(currentTime);
+    }
+  }, [audioMetering]);
 
   return (
     <StyledView className='stretch flex-1 items-center justify-start px-4'>
