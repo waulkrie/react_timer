@@ -21,7 +21,6 @@ const DELAY = 20;
 function TimerView() {
   const [isActive, setIsActive] = React.useState(false);
   const [splitList, setSplitList] = React.useState<string[]>([]);
-  const [currentTime, setCurrentTime] = React.useState('00.000');
   const [recording, setRecording] = React.useState<Recording>();
   const [permissionResponse, requestPermission] = Audio.usePermissions();
   const [audioMetering, setAudioMetering] = React.useState<number[]>([]);
@@ -29,7 +28,12 @@ function TimerView() {
   const stopwatch = useStopwatch(); // https://github.com/justinmahar/react-use-precision-timer
   let metering = -160;
 
-  function addSplit(time: string) {
+  function getCurrentTime() {
+    return (stopwatch.getElapsedRunningTime() / 1000).toFixed(3);
+  }
+
+  function addSplit() {
+    const time = getCurrentTime();
     logger.info('list:', splitList, 'time:', time);
     const newList = [...splitList, time];
     setSplitList(newList); // append new split time to splitList
@@ -114,7 +118,7 @@ function TimerView() {
     );
     if (lastMetering > -20 && m > 3.3) {
       logger.info('WE DID IT JINKINS!');
-      addSplit(currentTime);
+      addSplit();
     }
   }, [audioMetering]);
 
@@ -131,14 +135,13 @@ function TimerView() {
     }
   }
   function onSplitPress() {
-    const newList = [...splitList, currentTime];
+    const newList = [...splitList, stop];
     setSplitList(newList); // append new split time to splitList
     console.log(newList);
   }
 
   function onResetPress() {
     setSplitList([...[]]);
-    setCurrentTime('00.000');
     //console.log([...splitList, currentTime]);
   }
 
