@@ -4,9 +4,10 @@ import { Link } from 'expo-router';
 import { styled } from 'nativewind';
 import { Audio } from 'expo-av';
 import { Recording } from 'expo-av/build/Audio';
-import Timer from './timer';
+import { TimerRenderer } from './timerRenderer';
 import ListView from './listView';
 import Accordion from './accordian';
+import ButtonView from './buttonView';
 import { useStopwatch } from 'react-use-precision-timer';
 import pino from 'pino';
 const logger = pino();
@@ -15,6 +16,7 @@ const StyledView = styled(View);
 const StyledText = styled(Text);
 const StyledScrollView = styled(ScrollView);
 const StyledButton = styled(Pressable);
+const DELAY = 20;
 
 function TimerView() {
   const [isActive, setIsActive] = React.useState(false);
@@ -24,14 +26,8 @@ function TimerView() {
   const [permissionResponse, requestPermission] = Audio.usePermissions();
   const [audioMetering, setAudioMetering] = React.useState<number[]>([]);
   const [meterTime, setMeterTime] = React.useState<string[]>([]);
+  const stopwatch = useStopwatch(); // https://github.com/justinmahar/react-use-precision-timer
   let metering = -160;
-
-  function handleUpdateTime(time: string) {
-    setCurrentTime(time);
-  }
-  function getCurrentTime(): string {
-    return currentTime;
-  }
 
   function addSplit(time: string) {
     logger.info('list:', splitList, 'time:', time);
@@ -57,7 +53,7 @@ function TimerView() {
       const { recording } = await Audio.Recording.createAsync(
         Audio.RecordingOptionsPresets.LowQualityMonoAudio,
         undefined, // onRecordingStatusUpdate
-        30,
+        10,
       );
       setRecording(recording);
 
@@ -122,56 +118,40 @@ function TimerView() {
     }
   }, [audioMetering]);
 
+  function onStartPress() {
+    setIsActive(!isActive);
+    if (isActive === false) {
+      startRecording();
+      stopwatch.start();
+    } else {
+      stopRecording(); ///TODO: MOVE THIS TO PROGRAMATICALLY STOP BASED ON NUMBER OF SPLITS
+      console.log('stopwatch:', stopwatch.getElapsedStartedTime());
+      stopwatch.stop();
+      // setSplitList([]); // clear splitList
+    }
+  }
+  function onSplitPress() {
+    const newList = [...splitList, currentTime];
+    setSplitList(newList); // append new split time to splitList
+    console.log(newList);
+  }
+
+  function onResetPress() {
+    setSplitList([...[]]);
+    setCurrentTime('00.000');
+    //console.log([...splitList, currentTime]);
+  }
+
   return (
     <StyledView className='stretch flex-1 items-center justify-start px-4'>
       <StyledView className='mt-8 flex-row justify-center'>
-        <Timer started={isActive} time={currentTime} callback={handleUpdateTime} />
+        <TimerRenderer timer={stopwatch} />
       </StyledView>
-      <StyledView className='mt-4 flex-row justify-center'>
-        <StyledButton
-          className='rounded-md bg-blue-500 px-2'
-          onPress={() => {
-            setIsActive(!isActive);
-            if (isActive === false) {
-              startRecording();
-            } else {
-              stopRecording(); ///TODO: MOVE THIS TO PROGRAMATICALLY STOP BASED ON NUMBER OF SPLITS
-              // setSplitList([]); // clear splitList
-            }
-          }}
-        >
-          <StyledText className='text-lg text-white'>{isActive ? 'Stop' : 'Start'}</StyledText>
-        </StyledButton>
-        <StyledButton
-          className='rounded-md bg-blue-500 px-2'
-          onPress={() => {
-            const newList = [...splitList, currentTime];
-            setSplitList(newList); // append new split time to splitList
-            console.log(newList);
-          }}
-        >
-          <StyledText className='text-lg text-white'>{'Split'}</StyledText>
-        </StyledButton>
-        <StyledButton
-          className='rounded-md bg-blue-500 px-2'
-          onPress={() => {
-            setSplitList([...[]]); // append new split time to splitList
-            setCurrentTime('00.000');
-            //console.log([...splitList, currentTime]);
-          }}
-        >
-          <StyledText className='text-lg text-white'>{'Reset Splits'}</StyledText>
-        </StyledButton>
-      </StyledView>
+      <ButtonView started={isActive} onStart={onStartPress} onSplit={onSplitPress} onReset={onResetPress} />
       {/* <Accordion sections={(Title: 'Title', content: 'hello world')} /> */}
       <StyledScrollView className='max-h-90 mt-4 w-full'>
         <ListView list={splitList} />
       </StyledScrollView>
-      <StyledView className='flex-row justify-center py-7'>
-        <Link href='/settings' className='text-lg text-blue-500'>
-          Settings
-        </Link>
-      </StyledView>
     </StyledView>
   );
 }
