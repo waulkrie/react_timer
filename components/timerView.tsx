@@ -56,7 +56,7 @@ function TimerView() {
       const { recording } = await Audio.Recording.createAsync(
         Audio.RecordingOptionsPresets.LowQualityMonoAudio,
         undefined, // onRecordingStatusUpdate
-        10,
+        30,
       );
       setRecording(recording);
 
@@ -115,7 +115,7 @@ function TimerView() {
       'timeDelta:',
       parseInt(lastMeterTime) - parseInt(currentTime),
     );
-    if (lastMetering > -20 && m > 0.3) {
+    if (lastMetering > -20 && m > 3.3) {
       logger.info('WE DID IT JINKINS!');
       addSplit(currentTime);
     }
