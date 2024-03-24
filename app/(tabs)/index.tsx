@@ -5,10 +5,10 @@ import { styled, NativeWindStyleSheet, useColorScheme } from 'nativewind';
 import { Recording } from 'expo-av/build/Audio';
 import { useStopwatch } from 'react-use-precision-timer';
 import pino from 'pino';
-import { TimerRenderer } from '../../components/timerRenderer';
-import ListView from '../../components/listView';
-import Accordion from '../../components/accordian';
-import ButtonView from '../../components/buttonView';
+import { TimerRenderer } from 'components/timerRenderer';
+import ListView from 'components/listView';
+import Accordion from 'components/accordian';
+import ButtonView from 'components/buttonView';
 const logger = pino();
 
 NativeWindStyleSheet.setOutput({
