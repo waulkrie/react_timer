@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect } from 'react';
-import { Text, View, Pressable, ScrollView } from 'react-native';
-import { Link } from 'expo-router';
+import React, { useEffect } from 'react';
+import { Text, View, ScrollView } from 'react-native';
 import { styled } from 'nativewind';
 import { Audio } from 'expo-av';
 import { Recording } from 'expo-av/build/Audio';
@@ -15,7 +14,6 @@ const logger = pino();
 const StyledView = styled(View);
 const StyledText = styled(Text);
 const StyledScrollView = styled(ScrollView);
-const StyledButton = styled(Pressable);
 const DELAY = 20;
 
 function TimerView() {
@@ -116,7 +114,9 @@ function TimerView() {
       'timeDelta:',
       parseInt(lastMeterTime) - parseInt(currentTime),
     );
-    if (lastMetering > -20 && m > 3.3) {
+    // check if we are going from a high metering to a low metering - we dont want that
+    // make sure metering slope is greater than 2.0
+    if (lastMetering < -20 && m > 2.0) {
       logger.info('WE DID IT JINKINS!');
       addSplit();
     }
@@ -135,7 +135,7 @@ function TimerView() {
     }
   }
   function onSplitPress() {
-    const newList = [...splitList, stop];
+    const newList = [...splitList, getCurrentTime()];
     setSplitList(newList); // append new split time to splitList
     console.log(newList);
   }
