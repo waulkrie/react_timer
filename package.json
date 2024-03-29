@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@clerk/clerk-expo": "^1.0.0-beta.38",
     "@expo/webpack-config": "^19.0.0",
     "@react-native-async-storage/async-storage": "^1.22.3",
     "@react-native-community/slider": "4.4.2",
