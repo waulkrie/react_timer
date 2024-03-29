@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
-    "scheme": "ract",
+    "scheme": "react",
     "experiments": {
       "tsconfigPaths": true
     },
