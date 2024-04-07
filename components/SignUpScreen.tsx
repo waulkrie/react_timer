@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { styled } from 'nativewind';
 import { useSignUp } from '@clerk/clerk-expo';
+
+const StyledView = styled(View);
+const StyledTextInput = styled(TextInput);
+const StyledText = styled(Text);
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -56,7 +61,7 @@ export default function SignUpScreen() {
   return (
     <View>
       {!pendingVerification && (
-        <View>
+        <StyledView className='flex-1 items-center justify-start bg-zinc-200 px-4'>
           <View>
             <TextInput
               autoCapitalize='none'
@@ -93,9 +98,9 @@ export default function SignUpScreen() {
           </View>
 
           <TouchableOpacity onPress={onSignUpPress}>
-            <Text>Sign up</Text>
+          <StyledText className='text-lg text-red-600'>Sign up</StyledText>
           </TouchableOpacity>
-        </View>
+        </StyledView>
       )}
       {pendingVerification && (
         <View>

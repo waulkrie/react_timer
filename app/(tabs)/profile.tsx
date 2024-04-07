@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text } from 'react-native';
 import { styled } from 'nativewind';
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
-import SignUpScreen from 'components/signUpScreen';
+import SignUpScreen from 'components/SignUpScreen';
 import SignInScreen from 'components/signInScreen';
 import SignInWithOAuth from 'components/signInWithOauth';
 
@@ -48,8 +48,10 @@ export default function Login() {
           <StyledText className='text-lg text-red-600'>You are Signed out, please login or sign up</StyledText>
         </StyledView>
         <StyledView className='flex-1 items-center justify-start bg-zinc-200 px-4'>
+          <SignInScreen />
+        </StyledView>
+        <StyledView className='flex-1 items-center justify-start bg-zinc-200 px-4'>
           <SignUpScreen />
-          <StyledText className='text-lg text-red-600'>Sign Up</StyledText>
         </StyledView>
         <SignInWithOAuth />
       </SignedOut>
