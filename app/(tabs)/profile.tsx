@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text } from 'react-native';
 import { styled } from 'nativewind';
-import { ClerkProvider, SignedIn, SignedOut, useSession } from '@clerk/clerk-expo';
+import { ClerkProvider, SignedIn, SignedOut, useSession, useAuth } from '@clerk/clerk-expo';
 import SignUpScreen from 'components/signUpScreen';
 import SignInScreen from 'components/signInScreen';
 import SignInWithOAuth from 'components/signInWithOauth';
@@ -13,16 +13,27 @@ const StyledText = styled(Text);
 export default function Login() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
   const { session } = useSession();
   useEffect(() => {
-    if (session) {
-      // Obtain the raw JWT token string
-      const rawToken = session?.getToken();
-      console.log('SESSION TOKEN', rawToken);
-
-      // You can now use this raw token for authenticated API requests
+    async function fetchToken() {
+      if (session) {
+        const rawToken = await session.getToken({ template: 'test_template' });
+        console.log('SESSION TOKEN', rawToken);
+        // Perform further actions with the token here
+      }
     }
+
+    fetchToken();
   }, [session]);
+
+  useEffect(() => {
+    if (sessionId) {
+      const rawToken = getToken();
+      console.log('SESSION TOKEN2', rawToken);
+      // Perform further actions with the token here
+    }
+  }, [sessionId]);
 
   // Wrap both of the SignUp and SignIn in a view
   return (
