@@ -119,10 +119,10 @@ export default function App() {
       parseInt(lastMeterTime) - parseInt(currentTime),
     );
     // check if we are going from a high metering to a low metering - we dont want that
-    // make sure metering slope is greater than 2.0
+    ///TODO make sure metering slope is greater than 2.0 - this is the threshold to change from settings
     if (lastMetering < -20 && m > 2.0) {
       logger.info('WE DID IT JINKINS!');
-      addSplit(); // pass in the Date.now() in meterTime[] that was stored to addSplit
+      addSplit();
     }
   }, [audioMetering]);
 
