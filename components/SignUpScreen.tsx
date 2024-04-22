@@ -98,7 +98,7 @@ export default function SignUpScreen() {
           </View>
 
           <TouchableOpacity onPress={onSignUpPress}>
-          <StyledText className='text-lg text-red-600'>Sign up</StyledText>
+            <StyledText className='text-lg text-red-600'>Sign up</StyledText>
           </TouchableOpacity>
         </StyledView>
       )}

@@ -51,7 +51,7 @@ export default function SignInScreen() {
       </View>
 
       <TouchableOpacity onPress={onSignInPress}>
-      <StyledText className='text-lg text-red-600'>Sign in</StyledText>
+        <StyledText className='text-lg text-red-600'>Sign in</StyledText>
       </TouchableOpacity>
     </StyledView>
   );
